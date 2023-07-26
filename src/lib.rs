@@ -35,7 +35,7 @@
 #![warn(unused_imports, missing_docs)]
 
 mod audio;
-mod audio_output;
+pub mod audio_output;
 mod backend_settings;
 mod channel;
 mod instance;

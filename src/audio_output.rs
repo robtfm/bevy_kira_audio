@@ -25,6 +25,7 @@ use std::collections::HashMap;
 /// This struct holds the [`AudioManager`] to play audio through. It also
 /// keeps track of all audio instance handles and which sounds are playing in which channel.
 pub struct AudioOutput<B: Backend = DefaultBackend> {
+    /// the kira audio manager
     pub manager: Option<AudioManager<B>>,
     instances: HashMap<Channel, Vec<Handle<AudioInstance>>>,
     channels: HashMap<Channel, ChannelState>,
