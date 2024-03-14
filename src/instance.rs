@@ -1,6 +1,6 @@
 use crate::{AudioTween, PlaybackState};
 use bevy::asset::{Asset, Assets, Handle};
-use kira::sound::static_sound::StaticSoundHandle;
+use kira::sound::{static_sound::StaticSoundHandle, Region};
 use kira::tween::Value;
 use kira::{CommandError, Volume};
 use thiserror::Error;
@@ -115,6 +115,14 @@ impl AudioInstance {
     pub fn seek_by(&mut self, amount: f64) -> Option<AudioCommandError> {
         self.handle
             .seek_by(amount)
+            .err()
+            .map(|kira_error| kira_error.into())
+    }
+
+    /// set loop
+    pub fn set_loop(&mut self, looped: bool) -> Option<AudioCommandError> {
+        self.handle
+            .set_loop_region(looped.then_some(Region::default()))
             .err()
             .map(|kira_error| kira_error.into())
     }
