@@ -64,6 +64,14 @@ impl AudioInstance {
     pub fn seek_by(&mut self, amount: f64) {
         self.handle.seek_by(amount);
     }
+
+    /// set loop
+    pub fn set_loop(&mut self, looped: bool) -> Option<AudioCommandError> {
+        self.handle
+            .set_loop_region(looped.then_some(Region::default()))
+            .err()
+            .map(|kira_error| kira_error.into())
+    }
 }
 
 /// Extension trait to remove some boilerplate when
