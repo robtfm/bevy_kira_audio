@@ -1,6 +1,6 @@
 use crate::{AudioTween, PlaybackState};
 use bevy::asset::{Asset, Assets, Handle};
-use kira::sound::static_sound::StaticSoundHandle;
+use kira::sound::{static_sound::StaticSoundHandle, Region};
 use kira::tween::Value;
 use kira::{CommandError, Volume};
 use thiserror::Error;
