@@ -66,11 +66,9 @@ impl AudioInstance {
     }
 
     /// set loop
-    pub fn set_loop(&mut self, looped: bool) -> Option<AudioCommandError> {
+    pub fn set_loop(&mut self, looped: bool) {
         self.handle
             .set_loop_region(looped.then_some(Region::default()))
-            .err()
-            .map(|kira_error| kira_error.into())
     }
 }
 
