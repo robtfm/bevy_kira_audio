@@ -1,6 +1,6 @@
 use bevy::ecs::resource::Resource;
 use bevy::utils::default;
-use kira::manager::backend::DefaultBackend;
+use kira::manager::backend::{cpal::CpalBackendSettings, DefaultBackend};
 use kira::manager::{AudioManagerSettings, Capacities};
 
 /// This resource is used to configure the audio backend at creation
@@ -18,6 +18,8 @@ pub struct AudioSettings {
     pub command_capacity: usize,
     /// The maximum number of sounds that can be playing at a time.
     pub sound_capacity: u16,
+    /// buffer size override
+    pub buffer_size: Option<u32>,
 }
 
 impl Default for AudioSettings {
@@ -25,6 +27,7 @@ impl Default for AudioSettings {
         Self {
             command_capacity: 128,
             sound_capacity: 128,
+            buffer_size: None,
         }
     }
 }
@@ -36,6 +39,10 @@ impl From<AudioSettings> for AudioManagerSettings<DefaultBackend> {
                 command_capacity: settings.command_capacity,
                 sound_capacity: settings.sound_capacity,
                 ..default()
+            },
+            backend_settings: CpalBackendSettings {
+                buffer_size: settings.buffer_size.map(|sz| cpal::BufferSize::Fixed(sz)).unwrap_or(cpal::BufferSize::Default),
+                ..Default::default()
             },
             ..default()
         }

@@ -28,6 +28,7 @@ bevy_math = { version = "0.16.0" }
 anyhow = "1.0"
 uuid = { version = "1", features = ["fast-rng"] }
 kira = { version = "0.9.6", default-features = false, features = ["cpal"] }
+cpal = { version = "0.15.1" }
 ron = { version = "0.8", optional = true }
 serde = { version = "1.0", features = ["derive"], optional = true }
 parking_lot = "0.12"
