@@ -23,11 +23,15 @@ settings_loader = ["dep:ron", "dep:serde", "kira/serde"]
 android_shared_stdcxx = ["kira/android_shared_stdcxx"]
 
 [dependencies]
-bevy = { version = "0.16.0", default-features = false, features = ["std", "bevy_asset", "bevy_log"] }
+bevy = { version = "0.16.0", default-features = false, features = [
+    "std",
+    "bevy_asset",
+    "bevy_log",
+] }
 bevy_math = { version = "0.16.0" }
 anyhow = "1.0"
 uuid = { version = "1", features = ["fast-rng"] }
-kira = { version = "0.9.6", default-features = false, features = ["cpal"] }
+kira = { version = "0.10.8", default-features = false, features = ["cpal"] }
 cpal = { version = "0.15.1" }
 ron = { version = "0.8", optional = true }
 serde = { version = "1.0", features = ["derive"], optional = true }

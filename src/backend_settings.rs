@@ -1,7 +1,7 @@
 use bevy::ecs::resource::Resource;
 use bevy::utils::default;
-use kira::manager::backend::{cpal::CpalBackendSettings, DefaultBackend};
-use kira::manager::{AudioManagerSettings, Capacities};
+use kira::backend::cpal::CpalBackendSettings;
+use kira::{AudioManagerSettings, Capacities, DefaultBackend};
 
 /// This resource is used to configure the audio backend at creation
 ///
@@ -36,12 +36,15 @@ impl From<AudioSettings> for AudioManagerSettings<DefaultBackend> {
     fn from(settings: AudioSettings) -> Self {
         AudioManagerSettings {
             capacities: Capacities {
-                command_capacity: settings.command_capacity,
-                sound_capacity: settings.sound_capacity,
+                send_track_capacity: settings.command_capacity,
+                sub_track_capacity: settings.sound_capacity as usize,
                 ..default()
             },
             backend_settings: CpalBackendSettings {
-                buffer_size: settings.buffer_size.map(|sz| cpal::BufferSize::Fixed(sz)).unwrap_or(cpal::BufferSize::Default),
+                buffer_size: settings
+                    .buffer_size
+                    .map(|sz| cpal::BufferSize::Fixed(sz))
+                    .unwrap_or(cpal::BufferSize::Default),
                 ..Default::default()
             },
             ..default()
