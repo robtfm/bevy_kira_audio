@@ -102,7 +102,7 @@ pub mod prelude {
             static_sound::{StaticSoundData, StaticSoundSettings},
             FromFileError, Sound, SoundData,
         },
-        Frame, Volume,
+        Decibels, Frame,
     };
 }
 

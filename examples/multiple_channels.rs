@@ -23,7 +23,7 @@ fn main() {
 }
 
 fn create_row_systems<C: Component + Default>(
-) -> ScheduleConfigs<Box<(dyn bevy::prelude::System<In = (), Out = Result<(), BevyError>> + 'static)>>
+) -> ScheduleConfigs<Box<dyn bevy::prelude::System<In = (), Out = Result<(), BevyError>> + 'static>>
 {
     (
         stop_button::<C>,
@@ -236,14 +236,14 @@ struct ChannelAudioState<T> {
     stopped: bool,
     paused: bool,
     loop_started: bool,
-    volume: f64,
+    volume: f32,
     _marker: PhantomData<T>,
 }
 
 impl<T> Default for ChannelAudioState<T> {
     fn default() -> Self {
         ChannelAudioState {
-            volume: 1.0,
+            volume: 0.0,
             stopped: true,
             loop_started: false,
             paused: false,
