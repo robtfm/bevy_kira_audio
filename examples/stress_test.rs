@@ -16,6 +16,7 @@ fn main() {
         .insert_resource(AudioSettings {
             sound_capacity: 8192,
             command_capacity: 4096,
+            buffer_size: None,
         })
         .add_plugins((DefaultPlugins, AudioPlugin))
         .add_systems(Startup, prepare)
